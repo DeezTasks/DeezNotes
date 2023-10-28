@@ -1,0 +1,62 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+
+
+Table users {
+  id bigserial [pk]
+  username varchar [not null, unique]
+  email varchar [not null, unique]
+  role varchar [not null]
+  created_at timestamptz [not null, default: `now()`]
+}
+
+Table tags {
+  id bigserial [pk]
+  tag varchar [not null, unique]
+}
+
+Table userTags{
+  user_id bigserial [ref: > users.id, not null] // many to one
+  tag_id bigserial [ref: > tags.id, not null]
+
+}
+
+Table taskTags{
+  tasks_id bigserial [ref: > tasks.id, not null]
+  tag_id bigserial [ref: > tags.id, not null]
+
+}
+
+Table tasks {
+  id bigserial [pk]
+  title varchar [not null]
+  body text [note: 'Content of the post', not null]
+  user_id bigserial [ref: > users.id, not null] // many-to-one
+  status choice [not null]
+  created_at timestamptz [not null, default: `now()`]
+}
+
+Table groups {
+  id bigserial [pk]
+  name varchar [not null]  
+  
+}
+
+Table userGroups{
+  group_id bigserial [ref: > groups.id, not null]
+  user_id bigserial [ref: > users.id, not null]
+} 
+
+Table groupTags {
+  group_id bigserial [ref: > groups.id, not null]
+  tag_id bigserial [ref: > tags.id, not null]
+
+}
+
+
+
+
+
+
+Ref: "tasks"."user_id" < "tasks"."id"
