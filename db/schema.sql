@@ -55,8 +55,6 @@ ALTER TABLE "taskTags" ADD FOREIGN KEY ("tasks_id") REFERENCES "tasks" ("id");
 
 ALTER TABLE "taskTags" ADD FOREIGN KEY ("tag_id") REFERENCES "tags" ("id");
 
-ALTER TABLE "tasks" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-
 ALTER TABLE "userGroups" ADD FOREIGN KEY ("group_id") REFERENCES "groups" ("id");
 
 ALTER TABLE "userGroups" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
@@ -64,5 +62,3 @@ ALTER TABLE "userGroups" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "groupTags" ADD FOREIGN KEY ("group_id") REFERENCES "groups" ("id");
 
 ALTER TABLE "groupTags" ADD FOREIGN KEY ("tag_id") REFERENCES "tags" ("id");
-
-ALTER TABLE "tasks" ADD FOREIGN KEY ("id") REFERENCES "tasks" ("user_id");
